@@ -1,0 +1,37 @@
+[
+	{
+		"name": "2048",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRYqUoJjypgV7R6KI85QZoUHkbppfSeq8iPqtx_j4x70Q&s=10",
+		"link": "https://play2048.co/"
+	},
+	{
+		"name": "Cookie Clicker",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_v1u2aRkslPrhdqvnmShPEVstDyrukrQBTUNPc6VXmg&s=10",
+		"link": "https://orteil.dashnet.org/cookieclicker/"
+	},
+	{
+		"name": "Snake",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRzYdLFxGOTBYSZiuYLTNOGobuu083Kx2dwFFsYGqCYbA&s=10",
+		"link": "https://playsnake.org/"
+	},
+	{
+		"name": "Minesweeper",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ8BRSarNWwkEppOcaVpgTGeG1wzd-ARcDHyJ1mp0XjSg&s=10",
+		"link": "https://minesweeper.online/"
+	},
+	{
+		"name": "Chess",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSdyvZt5x60zQNwCaq5B9EXu6PW8VPx1_1bSSof7e4MPg&s=10",
+		"link": "https://www.chess.com/play/computer"
+	},
+	{
+		"name": "Tetris",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQPtrLTarPPv5NsoCto-oyb5R9Jv6sj95WKJKYBl2Z39g&s=10",
+		"link": "https://tetris.com/play-tetris"
+	},
+	{
+		"name": "Geometry Dash",
+		"image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT63bPBaT1i31CspQ9o7NccDg3uzZWoZjHJAtZ2MAD5jQ&s=10",
+		"link": "https://gd-webport.pages.dev/"
+	}
+]
