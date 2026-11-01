@@ -1,4 +1,24 @@
 "use strict";
+/**
+ * @type {HTMLFormElement}
+ */
+const form = document.getElementById("sj-form");
+/**
+ * @type {HTMLInputElement}
+ */
+const address = document.getElementById("sj-address");
+/**
+ * @type {HTMLInputElement}
+ */
+const searchEngine = document.getElementById("sj-search-engine");
+/**
+ * @type {HTMLParagraphElement}
+ */
+const error = document.getElementById("sj-error");
+/**
+ * @type {HTMLPreElement}
+ */
+const errorCode = document.getElementById("sj-error-code");
 
 const { ScramjetController } = $scramjetLoadController();
 
@@ -13,62 +33,32 @@ const scramjet = new ScramjetController({
 scramjet.init();
 
 const connection = new BareMux.BareMuxConnection("/baremux/worker.js");
-let proxyFrame;
 
-window.scramjetGo = async (url, container = document.getElementById("panel")) => {
+form.addEventListener("submit", async (event) => {
+	event.preventDefault();
+
 	try {
-		const destination = new URL(url);
-		if (!["http:", "https:"].includes(destination.protocol)) {
-			throw new Error("Only HTTP and HTTPS destinations are supported.");
-		}
-		if (!container) {
-			throw new Error("The proxy destination container is unavailable.");
-		}
-
 		await registerSW();
-
-		const wispUrl =
-			(location.protocol === "https:" ? "wss" : "ws") +
-			"://" +
-			location.host +
-			"/wisp/";
-		if ((await connection.getTransport()) !== "/libcurl/index.mjs") {
-			await connection.setTransport("/libcurl/index.mjs", [
-				{ websocket: wispUrl },
-			]);
-		}
-
-		if (!proxyFrame) {
-			proxyFrame = scramjet.createFrame();
-			proxyFrame.frame.id = "sj-frame";
-			proxyFrame.frame.style.cssText =
-				"width:100%;height:100%;min-height:100%;border:0;display:block";
-		}
-
-		container.replaceChildren(proxyFrame.frame);
-		proxyFrame.go(destination.toString());
 	} catch (err) {
-		const toast = document.getElementById("toast");
-		if (toast) {
-			toast.textContent = "Could not open page. Check the browser console.";
-			toast.classList.add("s");
-			setTimeout(() => toast.classList.remove("s"), 3000);
-		}
+		error.textContent = "Failed to register service worker.";
+		errorCode.textContent = err.toString();
 		throw err;
 	}
-};
 
-document.addEventListener("submit", async (event) => {
-	const form = event.target.closest("#sj-form");
-	if (!form) return;
+	const url = search(address.value, searchEngine.value);
 
-	event.preventDefault();
-	const address = form.querySelector("#sj-address");
-	const searchEngine = form.querySelector("#sj-search-engine");
-
-	try {
-		await window.scramjetGo(search(address.value, searchEngine.value));
-	} catch (err) {
-		console.error("Scramjet search navigation failed:", err);
+	let wispUrl =
+		(location.protocol === "https:" ? "wss" : "ws") +
+		"://" +
+		location.host +
+		"/wisp/";
+	if ((await connection.getTransport()) !== "/libcurl/index.mjs") {
+		await connection.setTransport("/libcurl/index.mjs", [
+			{ websocket: wispUrl },
+		]);
 	}
+	const frame = scramjet.createFrame();
+	frame.frame.id = "sj-frame";
+	document.body.appendChild(frame.frame);
+	frame.go(url);
 });
