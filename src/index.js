@@ -92,5 +92,5 @@ if (isNaN(port)) port = 8080;
 
 fastify.listen({
 	port: port,
-	host: "0.0.0.0",
+	host: "::",
 });
