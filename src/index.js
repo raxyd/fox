@@ -71,8 +71,7 @@ fastify.server.on("listening", () => {
 	console.log(`\thttp://localhost:${address.port}`);
 	console.log(`\thttp://${hostname()}:${address.port}`);
 	console.log(
-		`\thttp://${
-			address.family === "IPv6" ? `[${address.address}]` : address.address
+		`\thttp://${address.family === "IPv6" ? `[${address.address}]` : address.address
 		}:${address.port}`
 	);
 });
@@ -88,7 +87,7 @@ function shutdown() {
 
 let port = parseInt(process.env.PORT || "");
 
-if (isNaN(port)) port = 8080;
+if (isNaN(port)) port = 80;
 
 fastify.listen({
 	port: port,
